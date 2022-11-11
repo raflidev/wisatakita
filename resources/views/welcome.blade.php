@@ -1,44 +1,5 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
-    <title>Laravel</title>
-    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
-        integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous">
-    </script>
-    <!-- Fonts -->
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
-
-<?php
-$arr = [['Kebun Binatang', '08:00 - 16:00', 'Tambun Utara, Bekasi', '1.png'], ['Kebun Binatang 2', '08:00 - 16:00', 'Tambun Utara, Bekasi', '1.png'], ['Kebun Binatang 3', '08:00 - 16:00', 'Tambun Utara, Bekasi', '1.png'], ['Kebun Binatang 4', '08:00 - 16:00', 'Bogor', '1.png']];
-?>
-
-<body class="bg-primary-bg">
-    <div class="bg-white">
-        <div class=" px-10 font-nunito">
-            <div class=" flex items-center justify-between py-5">
-                <div class="text-2xl font-bold font-raleway">WisataKita</div>
-                <div class="space-x-5">
-                    <a href="">Home</a>
-                    <a href="">Rekomendasi</a>
-                    <a href="">List Wisata</a>
-                </div>
-                <div class="flex space-x-5 items-center">
-                    <div class="bg-primary-pink px-2 py-1 rounded-full">
-                        <i class="fas fa-search text-white"></i>
-                    </div>
-                    <div>
-                        <a href="" class=" font-semibold bg-primary-pink text-white py-2 px-4 rounded-lg">Masuk /
-                            Daftar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+@extends('layout.app')
+@section('content')
     <div class="mt-10">
         <div class="">
             <div class="flex">
@@ -66,18 +27,19 @@ $arr = [['Kebun Binatang', '08:00 - 16:00', 'Tambun Utara, Bekasi', '1.png'], ['
         </div>
         <div class="mt-10">
             <div class="px-40 grid grid-cols-4 gap-10 text-white font-nunito">
-                @foreach ($arr as $data)
-                    <div
-                        class="w-[18rem] h-[25rem] bg-gray-800 rounded-xl relative bg-[url('/images/place/{{ $data[3] }}')] bg-cover">
+                @foreach ($data as $data)
+                    <a href="{{ route('wisata.detail', ['id' => $data['id']]) }}"
+                        style='background-image: url("/images/place/{{ $data['gambar'] }}")'
+                        class="w-[18rem] h-[25rem] bg-gray-800 rounded-xl relative bg-cover">
                         <div class="absolute right-0 py-3 px-5 bg-red-500 rounded-bl-xl rounded-tr-xl">
                             Ramai
                         </div>
                         <div class="px-5 text-lg absolute bottom-0 w-full py-5 rounded-b-xl bg-black bg-opacity-50">
-                            <div class="font-bold">{{ $data[0] }}</div>
-                            <div>{{ $data[1] }}</div>
-                            <div>{{ $data[2] }}</div>
+                            <div class="font-bold">{{ $data['nama_wisata'] }}</div>
+                            <div>{{ $data['jam_buka'] }} - {{ $data['jam_tutup'] }}</div>
+                            <div>{{ $data['lokasi'] }}</div>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
         </div>
@@ -117,54 +79,4 @@ $arr = [['Kebun Binatang', '08:00 - 16:00', 'Tambun Utara, Bekasi', '1.png'], ['
             </div>
         </div>
     </div>
-
-    <div class="bg-white py-16">
-        <div class="flex justify-between px-20">
-            <div class="font-nunito space-y-2">
-                <div class="font-bold text-2xl font-raleway">WisataKita</div>
-                <div class="w-4/6">Jl. Tirta 8, Sumbermakmur Bontang, Bontang Baru</div>
-                <div class="">+62 878253688881</div>
-                <div class="flex space-x-4">
-                    <div class="px-2 py-1 rounded-full bg-red-700">
-                        <i class="fab fa-instagram text-white"></i>
-                    </div>
-                    <div class="px-2 py-1 bg-blue-800 rounded-full">
-                        <i class="fab fa-facebook text-white"></i>
-                    </div>
-                    <div class="px-2 py-1 rounded-full bg-blue-400">
-                        <i class="fab fa-twitter text-white"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="flex space-x-16 pr-10">
-                <div>
-                    <div class="font-bold font-nunito text-lg">Links</div>
-                    <div class="space-y-1 font-nunito">
-                        <div>
-                            <a href="" class="hover:underline">Privacy & Policy</a>
-                        </div>
-                        <div>
-                            <a href="" class="hover:underline">Terms & Conditions</a>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="font-bold font-nunito text-lg">Produk</div>
-                    <div class="space-y-1 font-nunito">
-                        <div>
-                            <a href="" class="hover:underline">Cari Wisata</a>
-                        </div>
-                        <div>
-                            <a href="" class="hover:underline">Rekomendasi</a>
-                        </div>
-                        <div>
-                            <a href="" class="hover:underline">About</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-
-</html>
+@endsection

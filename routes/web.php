@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\WisataController;
+use App\Models\Wisata;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $data = Wisata::all();
+    return view('welcome', ['data' => $data]);
 });
 
-Route::get('/detail', function () {
-    return view('welcome');
-});
+Route::get('/detail/{id}', [WisataController::class, 'detail'])->name('wisata.detail');

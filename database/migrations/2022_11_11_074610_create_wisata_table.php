@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string("jam_buka");
             $table->string("jam_tutup");
             $table->integer("tipe_wisata");
+            $table->integer("max_tiket");
             $table->timestamps();
         });
 
@@ -42,6 +43,7 @@ return new class extends Migration
             "jam_tutup" => "17:00",
             "tipe_wisata" => 1,
             "id_admin" => 1,
+            "max_tiket" => 1000,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -56,6 +58,7 @@ return new class extends Migration
             "jam_tutup" => "22:00",
             "tipe_wisata" => 1,
             "id_admin" => 2,
+            "max_tiket" => 1000,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -70,6 +73,22 @@ return new class extends Migration
             "jam_tutup" => "17:00",
             "tipe_wisata" => 1,
             "id_admin" => 2,
+            "max_tiket" => 1000,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('wisata')->insert([
+            "nama_wisata" => "TMII",
+            "lokasi" => "Jonggol, Jakarta",
+            "deskripsi" => "loremipsum21",
+            "gambar" => "1.png",
+            "harga" => 30000,
+            "jam_buka" => "08:00",
+            "jam_tutup" => "17:00",
+            "tipe_wisata" => 1,
+            "id_admin" => 2,
+            "max_tiket" => 1000,
             'created_at' => now(),
             'updated_at' => now()
         ]);
