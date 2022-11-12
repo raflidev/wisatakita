@@ -15,13 +15,32 @@ class WisataController extends Controller
      */
     public function index()
     {
-        //
+        $data = Wisata::all();
+        return view('welcome', ['data' => $data]);
     }
 
     public function detail($id)
     {
         $data = DB::table('wisata')->where('id', $id)->first();
         return view('detail', ['data' => $data]);
+    }
+
+    public function rekomendasi()
+    {
+        $data = Wisata::all();
+        return view('rekomendasi', ['data' => $data]);
+    }
+
+    public function listWisata()
+    {
+        $data = Wisata::all();
+        return view('list', ['data' => $data, 'wisata' => NULL]);
+    }
+
+    public function listWisataSearch($wisata)
+    {
+        $data =  DB::table('wisata')->where('nama_wisata', 'like', "%$wisata%")->orWhere('lokasi', 'like', "%$wisata%")->get();
+        return view('list', ['data' => $data, 'wisata' => $wisata]);
     }
 
     /**

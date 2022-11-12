@@ -16,9 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $data = Wisata::all();
-    return view('welcome', ['data' => $data]);
-});
-
+Route::get('/', [WisataController::class, 'index'])->name('wisata.home');
 Route::get('/detail/{id}', [WisataController::class, 'detail'])->name('wisata.detail');
+Route::get('/rekomendasi', [WisataController::class, 'rekomendasi'])->name('wisata.rekomendasi');
+Route::get('/list_wisata', [WisataController::class, 'listWisata'])->name('wisata.list');
+Route::get('/list_wisata/{wisata}', [WisataController::class, 'listWisataSearch'])->name('wisata.listSearch');
