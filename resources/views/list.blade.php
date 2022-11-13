@@ -1,7 +1,11 @@
 @extends('layout.app')
 
+@section('navbar')
+    @include('layout.navbar')
+@endsection
+
 @section('content')
-    <div>
+    <div class="bg-primary-bg">
         <div class="flex justify-center pt-32">
             <div class="text-center w-full">
                 <div class="font-bold font-raleway text-4xl w-full">List Wisata</div>
@@ -54,4 +58,8 @@
             }
         }
     </script>
+@endsection
+
+@section('footer')
+    @include('layout.footer')
 @endsection

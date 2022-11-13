@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("id_wisata");
             $table->unsignedBigInteger("id_user");
+            $table->string('kode_tiket');
             $table->integer("jumlah_tiket");
             $table->integer("total_harga");
             $table->string('metode_pembayaran');
@@ -32,6 +33,7 @@ return new class extends Migration
         DB::table('transaksi')->insert([
             'id_wisata' => 1,
             'id_user' => 1,
+            'kode_tiket' => '123456789',
             'jumlah_tiket' => 2,
             'total_harga' => 20000,
             'metode_pembayaran' => 'DANA',
@@ -41,6 +43,7 @@ return new class extends Migration
         DB::table('transaksi')->insert([
             'id_wisata' => 2,
             'id_user' => 1,
+            'kode_tiket' => '123456789',
             'jumlah_tiket' => 2,
             'total_harga' => 20000,
             'metode_pembayaran' => 'BRI',
@@ -49,6 +52,7 @@ return new class extends Migration
         ]);
         DB::table('transaksi')->insert([
             'id_wisata' => 3,
+            'kode_tiket' => '123456789',
             'id_user' => 1,
             'jumlah_tiket' => 2,
             'total_harga' => 20000,

@@ -1,4 +1,9 @@
 @extends('layout.app')
+
+@section('navbar')
+    @include('layout.navbar')
+@endsection
+
 @section('content')
     <div class="px-10 pt-10 font-nunito">
         <div id="popupBayar" class="hidden">
@@ -41,7 +46,8 @@
                         <div class="text-xl font-bold">Pembayaran via</div>
                         <div class="grid grid-cols-4 gap-4 pt-10">
                             <div>
-                                <input class="hidden" id="radio_1" type="radio" name="radio" checked>
+                                <input class="hidden" id="radio_1" type="radio" name="radio" value="BCA" checked
+                                    onchange="handleChange(this)">
                                 <label class="flex flex-col p-4 border-2 border-gray-400 cursor-pointer rounded"
                                     for="radio_1">
                                     <div class="h-[4rem] flex items-center">
@@ -50,7 +56,8 @@
                                 </label>
                             </div>
                             <div>
-                                <input class="hidden" id="radio_2" type="radio" name="radio">
+                                <input class="hidden" id="radio_2" type="radio" name="radio" value="BNI"
+                                    onchange="handleChange(this);">
                                 <label class="flex flex-col p-4 border-2 border-gray-400 cursor-pointer rounded"
                                     for="radio_2">
                                     <div class="h-[4rem] flex items-center">
@@ -59,7 +66,8 @@
                                 </label>
                             </div>
                             <div>
-                                <input class="hidden" id="radio_3" type="radio" name="radio">
+                                <input class="hidden" id="radio_3" type="radio" name="radio" value="BRI"
+                                    onchange="handleChange(this);">
                                 <label class="flex flex-col p-4 border-2 border-gray-400 cursor-pointer rounded"
                                     for="radio_3">
                                     <div class="h-[4rem] flex items-center">
@@ -68,7 +76,8 @@
                                 </label>
                             </div>
                             <div>
-                                <input class="hidden" id="radio_4" type="radio" name="radio">
+                                <input class="hidden" id="radio_4" type="radio" name="radio" value="DANA"
+                                    onchange="handleChange(this);">
                                 <label class="flex flex-col p-4 border-2 border-gray-400 cursor-pointer rounded"
                                     for="radio_4">
                                     <div class="h-[4rem] flex items-center">
@@ -77,7 +86,8 @@
                                 </label>
                             </div>
                             <div>
-                                <input class="hidden" id="radio_5" type="radio" name="radio">
+                                <input class="hidden" id="radio_5" type="radio" name="radio" value="GOPAY"
+                                    onchange="handleChange(this);">
                                 <label class="flex flex-col p-4 border-2 border-gray-400 cursor-pointer rounded"
                                     for="radio_5">
                                     <div class="h-[4rem] flex items-center">
@@ -86,7 +96,8 @@
                                 </label>
                             </div>
                             <div>
-                                <input class="hidden" id="radio_6" type="radio" name="radio">
+                                <input class="hidden" id="radio_6" type="radio" name="radio" value="Link Aja"
+                                    onchange="handleChange(this);">
                                 <label class="flex flex-col p-4 border-2 border-gray-400 cursor-pointer rounded"
                                     for="radio_6">
                                     <div class="h-[4rem] flex items-center">
@@ -95,7 +106,8 @@
                                 </label>
                             </div>
                             <div>
-                                <input class="hidden" id="radio_7" type="radio" name="radio">
+                                <input class="hidden" id="radio_7" type="radio" name="radio" value="Mandiri"
+                                    onchange="handleChange(this);">
                                 <label class="flex flex-col p-4 border-2 border-gray-400 cursor-pointer rounded"
                                     for="radio_7">
                                     <div class="h-[4rem] flex items-center">
@@ -104,7 +116,8 @@
                                 </label>
                             </div>
                             <div>
-                                <input class="hidden" id="radio_8" type="radio" name="radio">
+                                <input class="hidden" id="radio_8" type="radio" name="radio" value="Shopeepay"
+                                    onchange="handleChange(this);">
                                 <label class="flex flex-col p-4 border-2 border-gray-400 cursor-pointer rounded"
                                     for="radio_8">
                                     <div class="h-[4rem] flex items-center">
@@ -114,9 +127,22 @@
                             </div>
                         </div>
                         <div class="mt-10">
-                            <button
-                                class="rounded-lg px-8 py-2 bg-orange-400 hover:bg-orange-800 font-bold text-lg text-white">Lakukan
-                                Pembayaran</button>
+                            @if (Auth::user() != null)
+                                <form action="{{ route('wisata.transaksi') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="wisataid" value="{{ $data->id }}">
+                                    <input type="hidden" name="harga" value="{{ $data->harga }}">
+                                    <input type="hidden" name="total" id="jumlahtotal" value="">
+                                    <input type="hidden" name="metode" id="radioinput" value="BCA">
+                                    <button type="submit"
+                                        class="rounded-lg px-8 py-2 bg-orange-400 hover:bg-orange-800 font-bold text-lg text-white">Lakukan
+                                        Pembayaran</button>
+                                </form>
+                            @else
+                                <button
+                                    class="rounded-lg px-8 py-2 bg-orange-400 hover:bg-orange-800 font-bold text-lg text-white">Lakukan
+                                    Pembayaran</button>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -199,10 +225,15 @@
             var total = jumlah * harga;
             document.getElementById('total').innerHTML = "Rp. " + total;
             document.getElementById('jumlahTiket').innerHTML = jumlah;
+            document.getElementById('jumlahtotal').value = jumlah;
         }
 
         function closePopup() {
             document.getElementById('popupBayar').classList.add('hidden');
+        }
+
+        function handleChange(src) {
+            document.getElementById('radioinput').value = src.value;
         }
     </script>
     <style>
@@ -221,4 +252,8 @@
             border-color: black;
         }
     </style>
+@endsection
+
+@section('footer')
+    @include('layout.footer')
 @endsection

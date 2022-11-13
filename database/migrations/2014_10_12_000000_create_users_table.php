@@ -56,6 +56,15 @@ return new class extends Migration
             'username' => 'siensalim',
             'password' => Hash::make('qwerty123'),
         ]);
+        DB::table('users')->insert([
+            'nama_depan' => 'test',
+            'nama_belakang' => 'test',
+            'notelp' => '081234567890',
+            'kota' => 'Bontang',
+            'email' => 'test@asd.com',
+            'username' => 'test',
+            'password' => Hash::make('test'),
+        ]);
     }
 
     /**

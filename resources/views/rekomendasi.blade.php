@@ -1,7 +1,11 @@
 @extends('layout.app')
 
+@section('navbar')
+    @include('layout.navbar')
+@endsection
+
 @section('content')
-    <div>
+    <div class="bg-primary-bg">
         <div class="flex justify-center pt-32">
             <div class="text-center">
                 <div class="font-bold font-raleway text-4xl">Rekomendasi Wisata</div>
@@ -42,4 +46,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer')
+    @include('layout.footer')
 @endsection
