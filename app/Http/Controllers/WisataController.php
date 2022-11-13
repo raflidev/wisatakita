@@ -49,7 +49,7 @@ class WisataController extends Controller
     public function transaksi(Request $request)
     {
         $transaksi = new Transaksi([
-            'id_wisata' => $request->wisataid,
+            'id_wisata' => $request->wisataid, 
             'id_user' => Auth::user()->id,
             'kode_tiket' => rand(0, 999999999),
             'jumlah_tiket' => $request->total,

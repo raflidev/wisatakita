@@ -67,26 +67,23 @@ class UserController extends Controller
         $rules = [
             'nama_depan' => 'required',
             'nama_belakang' => 'required',
-            'email' => 'required',
+            'email' => 'required|email|unique:users',
             'kota' => 'required',
             'notelp' => 'required',
-            'username' => 'required',
-            'password' => 'required',
-            'confirm_password' => 'required',
+            'username' => 'required|unique:users|min:4',
+            'password' => 'required|min:8',
+            'confirm_password' => 'required|same:password',
         ];
 
         $customMessages = [
-            'required' => ':attribute tidak boleh kosong.'
+            'required' => ':attribute tidak boleh kosong.',
+            'unique' => ':attribute sudah terdaftar.',
+            'email' => ':attribute harus berupa email.',
+            'min' => ':attribute minimal :min karakter.',
+            'same' => ':attribute tidak sama dengan password.',
         ];
 
         $this->validate($request, $rules, $customMessages);
-
-        if ($request->password != $request->confirm_password) {
-            return back()->withErrors([
-                'wrong' => 'Password tidak sama',
-            ]);
-        }
-
         $user = new User([
             'nama_depan' => $request->nama_depan,
             'nama_belakang' => $request->nama_belakang,

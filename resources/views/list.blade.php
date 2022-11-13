@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="bg-primary-bg">
+    <div class="bg-primary-bg pb-10">
         <div class="flex justify-center pt-32">
             <div class="text-center w-full">
                 <div class="font-bold font-raleway text-4xl w-full">List Wisata</div>
