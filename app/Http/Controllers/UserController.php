@@ -18,10 +18,6 @@ class UserController extends Controller
         return view('login');
     }
 
-    public function login_admin()
-    {
-        return view('login');
-    }
 
     public function daftar()
     {
@@ -58,7 +54,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.user.user_read');
     }
 
     /**
@@ -121,7 +117,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = User::find($id);
+        return view('dashboard.user.user_edit', ['data' => $data]);
     }
 
     /**
@@ -133,7 +130,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->update([
+            'nama_depan' => $request->nama_depan,
+            'nama_belakang' => $request->nama_belakang,
+            'email' => $request->email, -'kota' => $request->kota,
+            'notelp' => $request->notelp,
+            'username' => $request->username,
+            'password' => bcrypt($request->password),
+        ]);
+
+        return redirect()->route('dashboard.user')->with('success', 'Data Berhasil Diubah');
     }
 
     /**
@@ -144,7 +151,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('dashboard.user')->with('success', 'Data Berhasil Dihapus');
     }
 
     public function logout(Request $request)

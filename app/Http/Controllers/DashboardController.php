@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaksi;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class TransaksiController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +13,12 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        $data = Transaksi::all();
-        return view('dashboard.transaksi.transaksi_read', ['data' => $data]);
+        return view('dashboard');
+    }
+
+    public function wisata()
+    {
+        return view('dashboard.wisata.wisata_read');
     }
 
     /**
@@ -37,17 +39,7 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        $transaksi = new Transaksi([
-            'id_wisata' => $request->wisataid,
-            'id_user' => Auth::user()->id,
-            'kode_tiket' => rand(0, 999999999),
-            'jumlah_tiket' => $request->total,
-            'total_harga' => $request->total * $request->harga,
-            'metode_pembayaran' => $request->metode,
-        ]);
-        $transaksi->save();
-
-        return redirect()->route('qr.home');
+        //
     }
 
     /**
@@ -81,17 +73,7 @@ class TransaksiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $transaksi = Transaksi::find($id);
-        $transaksi->update([
-            'id_wisata' => $request->wisataid,
-            'id_user' => Auth::user()->id,
-            'kode_tiket' => rand(0, 999999999),
-            'jumlah_tiket' => $request->total,
-            'total_harga' => $request->total * $request->harga,
-            'metode_pembayaran' => $request->metode,
-        ]);
-
-        return redirect()->route('qr.home');
+        //
     }
 
     /**

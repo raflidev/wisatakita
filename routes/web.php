@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QRController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WisataController;
@@ -34,31 +35,40 @@ Route::post('/daftar', [UserController::class, 'store'])->name('user.prosesdafta
 Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
 
 // Pembayaran Transaksi
-Route::post('/transaksi', [WisataController::class, 'transaksi'])->name('wisata.transaksi');
+Route::post('/transaksi', [TransaksiController::class, 'store'])->name('transaksi.store');
 
 // QR
 Route::get('/qr', [QRController::class, 'detail'])->name('qr.home')->middleware('auth');
 
 // Dashboard
-Route::get('/dashboard', [WisataController::class, 'dashboard'])->name('wisata.dashboard')->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
 
-Route::get('/dashboard/wisata', [WisataController::class, 'index'])->name('dashboard.wisata')->middleware('auth');
-Route::get('/dashboard/wisata/add', [WisataController::class, 'create'])->name('dashboard.wisata_add')->middleware('auth');
-Route::post('/dashboard/wisata/add', [WisataController::class, 'store'])->name('dashboard.wisata_post')->middleware('auth');
-Route::get('/dashboard/wisata/update/{id}', [WisataController::class, 'edit'])->name('dashboard.wisata_update')->middleware('auth');
-Route::put('/dashboard/wisata/update/{id}', [WisataController::class, 'update'])->name('dashboard.wisata_put')->middleware('auth');
-Route::delete('/dashboard/wisata/delete/{id}', [WisataController::class, 'destroy'])->name('dashboard.wisata_delete')->middleware('auth');
+Route::prefix('dashboard')->group(function () {
+    Route::get('/wisata', [DashboardController::class, 'wisata'])->name('dashboard.wisata')->middleware('auth');
+    Route::get('/wisata/add', [WisataController::class, 'create'])->name('dashboard.wisata_add')->middleware('auth');
+    Route::post('/wisata/add', [WisataController::class, 'store'])->name('dashboard.wisata_post')->middleware('auth');
+    Route::get('/wisata/update/{id}', [WisataController::class, 'edit'])->name('dashboard.wisata_update')->middleware('auth');
+    Route::put('/wisata/update/{id}', [WisataController::class, 'update'])->name('dashboard.wisata_put')->middleware('auth');
+    Route::delete('/wisata/delete/{id}', [WisataController::class, 'destroy'])->name('dashboard.wisata_delete')->middleware('auth');
 
-Route::get('/dashboard/admin', [UserController::class, 'index'])->name('dashboard.admin')->middleware('auth');
-Route::get('/dashboard/admin/add', [UserController::class, 'create'])->name('dashboard.admin_add')->middleware('auth');
-Route::post('/dashboard/admin/add', [UserController::class, 'store'])->name('dashboard.admin_post')->middleware('auth');
-Route::get('/dashboard/admin/update/{id}', [UserController::class, 'edit'])->name('dashboard.admin_update')->middleware('auth');
-Route::put('/dashboard/admin/update/{id}', [UserController::class, 'update'])->name('dashboard.admin_put')->middleware('auth');
-Route::delete('/dashboard/admin/delete/{id}', [UserController::class, 'destroy'])->name('dashboard.admin_delete')->middleware('auth');
+    Route::get('/admin', [UserController::class, 'index'])->name('dashboard.admin')->middleware('auth');
+    Route::get('/admin/add', [UserController::class, 'create'])->name('dashboard.admin_add')->middleware('auth');
+    Route::post('/admin/add', [UserController::class, 'store'])->name('dashboard.admin_post')->middleware('auth');
+    Route::get('/admin/update/{id}', [UserController::class, 'edit'])->name('dashboard.admin_update')->middleware('auth');
+    Route::put('/admin/update/{id}', [UserController::class, 'update'])->name('dashboard.admin_put')->middleware('auth');
+    Route::delete('/admin/delete/{id}', [UserController::class, 'destroy'])->name('dashboard.admin_delete')->middleware('auth');
 
-Route::get('/dashboard/wisata', [WisataController::class, 'dashboard_wisata'])->name('dashboard.wisata')->middleware('auth');
-Route::get('/dashboard/wisata/add', [WisataController::class, 'create'])->name('dashboard.wisata_add')->middleware('auth');
-Route::post('/dashboard/wisata/add', [WisataController::class, 'store'])->name('dashboard.wisata_post')->middleware('auth');
-Route::get('/dashboard/wisata/update/{id}', [WisataController::class, 'edit'])->name('dashboard.wisata_update')->middleware('auth');
-Route::put('/dashboard/wisata/update/{id}', [WisataController::class, 'update'])->name('dashboard.wisata_put')->middleware('auth');
-Route::delete('/dashboard/wisata/delete/{id}', [WisataController::class, 'destroy'])->name('dashboard.wisata_delete')->middleware('auth');
+    Route::get('/wisata', [WisataController::class, 'dashboard_wisata'])->name('dashboard.wisata')->middleware('auth');
+    Route::get('/wisata/add', [WisataController::class, 'create'])->name('dashboard.wisata_add')->middleware('auth');
+    Route::post('/wisata/add', [WisataController::class, 'store'])->name('dashboard.wisata_post')->middleware('auth');
+    Route::get('/wisata/update/{id}', [WisataController::class, 'edit'])->name('dashboard.wisata_update')->middleware('auth');
+    Route::put('/wisata/update/{id}', [WisataController::class, 'update'])->name('dashboard.wisata_put')->middleware('auth');
+    Route::delete('/wisata/delete/{id}', [WisataController::class, 'destroy'])->name('dashboard.wisata_delete')->middleware('auth');
+
+    Route::get('/user', [UserController::class, 'dashboard_user'])->name('dashboard.user')->middleware('auth');
+    Route::get('/user/add', [UserController::class, 'create'])->name('dashboard.user_add')->middleware('auth');
+    Route::post('/user/add', [UserController::class, 'store'])->name('dashboard.user_post')->middleware('auth');
+    Route::get('/user/update/{id}', [UserController::class, 'edit'])->name('dashboard.user_update')->middleware('auth');
+    Route::put('/user/update/{id}', [UserController::class, 'update'])->name('dashboard.user_put')->middleware('auth');
+    Route::delete('/user/delete/{id}', [UserController::class, 'destroy'])->name('dashboard.user_delete')->middleware('auth');
+});

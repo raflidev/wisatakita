@@ -22,17 +22,6 @@ class WisataController extends Controller
         return view('home', ['data' => $data]);
     }
 
-    public function dashboard_wisata()
-    {
-        return view('dashboard.wisata.wisata_read');
-    }
-
-    public function dashboard()
-    {
-        return view('dashboard');
-    }
-
-
     public function detail($id)
     {
         $data = DB::table('wisata')->where('id', $id)->first();
@@ -57,21 +46,6 @@ class WisataController extends Controller
         return view('list', ['data' => $data, 'wisata' => $wisata]);
     }
 
-    public function transaksi(Request $request)
-    {
-        $transaksi = new Transaksi([
-            'id_wisata' => $request->wisataid,
-            'id_user' => Auth::user()->id,
-            'kode_tiket' => rand(0, 999999999),
-            'jumlah_tiket' => $request->total,
-            'total_harga' => $request->total * $request->harga,
-            'metode_pembayaran' => $request->metode,
-        ]);
-        $transaksi->save();
-
-        return redirect()->route('qr.home');
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -90,7 +64,32 @@ class WisataController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_wisata' => 'required',
+            'id_admin' => 'required',
+            'lokasi' => 'required',
+            'deskripsi' => 'required',
+            'harga' => 'required',
+            'gambar' => 'required',
+            'jam_buka' => 'required',
+            'jam_tutup' => 'required',
+            'max_tiket' => 'required',
+        ]);
+
+        $wisata = new Wisata([
+            'nama_wisata' => $request->nama_wisata,
+            'id_admin' => $request->id_admin,
+            'lokasi' => $request->lokasi,
+            'deskripsi' => $request->deskripsi,
+            'harga' => $request->harga,
+            'gambar' => $request->gambar,
+            'jam_buka' => $request->jam_buka,
+            'jam_tutup' => $request->jam_tutup,
+            'max_tiket' => $request->max_tiket,
+        ]);
+
+        $wisata->save();
+        return redirect()->route('dashboard.wisata')->with('success', 'Berhasil Membuat Wisata');
     }
 
     /**
@@ -112,7 +111,8 @@ class WisataController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Wisata::find($id);
+        return view('dashboard.wisata.wisata_edit', ['data' => $data]);
     }
 
     /**
@@ -124,7 +124,20 @@ class WisataController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $wisata = Wisata::find($id);
+        $wisata->update([
+            'nama_wisata' => $request->nama_wisata,
+            'id_admin' => $request->id_admin,
+            'lokasi' => $request->lokasi,
+            'deskripsi' => $request->deskripsi,
+            'harga' => $request->harga,
+            'gambar' => $request->gambar,
+            'jam_buka' => $request->jam_buka,
+            'jam_tutup' => $request->jam_tutup,
+            'max_tiket' => $request->max_tiket,
+        ]);
+
+        return redirect()->route('dashboard.wisata')->with('success', 'Berhasil Mengubah Wisata');
     }
 
     /**
@@ -135,6 +148,8 @@ class WisataController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $wisata = Wisata::find($id);
+        $wisata->delete();
+        return redirect()->route('dashboard.wisata')->with('success', 'Berhasil Menghapus Wisata');
     }
 }
