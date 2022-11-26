@@ -22,6 +22,17 @@ class WisataController extends Controller
         return view('home', ['data' => $data]);
     }
 
+    public function dashboard_wisata()
+    {
+        return view('dashboard.wisata.wisata_read');
+    }
+
+    public function dashboard()
+    {
+        return view('dashboard');
+    }
+
+
     public function detail($id)
     {
         $data = DB::table('wisata')->where('id', $id)->first();
@@ -49,7 +60,7 @@ class WisataController extends Controller
     public function transaksi(Request $request)
     {
         $transaksi = new Transaksi([
-            'id_wisata' => $request->wisataid, 
+            'id_wisata' => $request->wisataid,
             'id_user' => Auth::user()->id,
             'kode_tiket' => rand(0, 999999999),
             'jumlah_tiket' => $request->total,

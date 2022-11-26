@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\QRhistory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
-class QRController extends Controller
+class TransaksiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,11 +16,6 @@ class QRController extends Controller
         //
     }
 
-    public function detail()
-    {
-        $data = DB::table('transaksi')->join('wisata', 'transaksi.id_wisata', '=', 'wisata.id')->where('transaksi.id_user', Auth::user()->id)->orderByDesc('transaksi.created_at')->first();
-        return view('qr', ['data' => $data]);
-    }
     /**
      * Show the form for creating a new resource.
      *
