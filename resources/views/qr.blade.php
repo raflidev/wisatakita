@@ -8,8 +8,6 @@
     <div class="bg-primary-bg">
         <div class="flex h-screen w-full">
             <div class="m-auto w-9/12">
-
-
                 <div id="popupMap" class="hidden">
                     <div
                         class="w-[70rem] h-[30rem] border border-black bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-10 rounded-lg">

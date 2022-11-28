@@ -4,7 +4,7 @@
 <div class="flex">
     @include('layout.sidebar')
     <div class="w-10/12">
-    crott
+    haloo
     </div>
 </div>
 @endsection

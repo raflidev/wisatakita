@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QRController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WisataController;
 use App\Models\Wisata;
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WisataController::class, 'index'])->name('wisata.home');
 Route::get('/detail/{id}', [WisataController::class, 'detail'])->name('wisata.detail');
+Route::post('/detail', [TransaksiController::class, 'store'])->name('wisata.transaksi');
 Route::get('/rekomendasi', [WisataController::class, 'rekomendasi'])->name('wisata.rekomendasi');
 Route::get('/list_wisata', [WisataController::class, 'listWisata'])->name('wisata.list');
 Route::get('/list_wisata/{wisata}', [WisataController::class, 'listWisataSearch'])->name('wisata.listSearch');

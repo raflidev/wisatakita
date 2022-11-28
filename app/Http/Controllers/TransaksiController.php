@@ -69,7 +69,8 @@ class TransaksiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Transaksi::find($id);
+        return view('dashboard.transaksi.transaksi_read', ['data' => $data]);
     }
 
     /**
@@ -102,6 +103,8 @@ class TransaksiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $transaksi = Transaksi::find($id);
+        $transaksi->delete();
+        
     }
 }

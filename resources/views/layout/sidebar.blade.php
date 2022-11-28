@@ -16,27 +16,6 @@
                             </div>
                             <div class="text-sm font-semibold uppercase">history perjalanan</div>
                         </a>
-                        <a href=""
-                            class="flex space-x-3 {{ Route::is('kerjasama.moa') ? 'bg-slate-500 text-white' : '' }} items-center hover:bg-slate-500 hover:text-white rounded p-2">
-                            <div class="w-5 text-center">
-                                <i class="fas fa-network-wired hover:text-white text-slate-400"></i>
-                            </div>
-                            <div class="text-sm font-semibold uppercase">Input Kerja Sama - MOA</div>
-                        </a>
-                        <a href=""
-                            class="flex space-x-3 {{ Route::is('kerjasama.mou') ? 'bg-slate-500 text-white' : '' }} items-center hover:bg-slate-500 hover:text-white rounded p-2">
-                            <div class="w-5 text-center">
-                                <i class="fas fa-network-wired hover:text-white text-slate-400"></i>
-                            </div>
-                            <div class="text-sm font-semibold uppercase">Input Kerja Sama - MOU</div>
-                        </a>
-                        <a href=""
-                            class="flex space-x-3 {{ Route::is('kerjasama.ai') ? 'bg-slate-500 text-white' : '' }} items-center hover:bg-slate-500 hover:text-white rounded p-2">
-                            <div class="w-5 text-center">
-                                <i class="fas fa-network-wired hover:text-white text-slate-400"></i>
-                            </div>
-                            <div class="text-sm font-semibold uppercase">Input Kerja Sama - AI</div>
-                        </a>
                         <a href='/user/input'
                             class="flex space-x-3 items-center hover:bg-slate-500 hover:text-white rounded p-2">
                             <div class="w-5 text-center">
