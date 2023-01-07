@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Wisata;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -18,7 +19,9 @@ class DashboardController extends Controller
 
     public function wisata()
     {
-        return view('dashboard.wisata.wisata_read');
+        // get wisata table
+        $wisata = Wisata::all();
+        return view('dashboard.wisata.wisata_read', ['wisata' => $wisata]);
     }
 
     /**

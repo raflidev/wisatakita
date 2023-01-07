@@ -53,7 +53,7 @@ class WisataController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.wisata.wisata_create');
     }
 
     /**
@@ -74,6 +74,7 @@ class WisataController extends Controller
             'jam_buka' => 'required',
             'jam_tutup' => 'required',
             'max_tiket' => 'required',
+            'tipe_wisata' => 'required',
         ]);
 
         $wisata = new Wisata([
@@ -86,6 +87,7 @@ class WisataController extends Controller
             'jam_buka' => $request->jam_buka,
             'jam_tutup' => $request->jam_tutup,
             'max_tiket' => $request->max_tiket,
+            'tipe_wisata' => $request->tipe_wisata,
         ]);
 
         $wisata->save();

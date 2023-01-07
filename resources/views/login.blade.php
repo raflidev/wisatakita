@@ -10,6 +10,7 @@
             <div class="m-auto w-2/6">
                 <div class="flex justify-center items-center">
                     <div class="w-full bg-white p-8 py-[5rem] rounded-xl">
+                      @endif
                         @if ($errors->first('wrong'))
                             <div id="error" class="w-full px-5 bg-red-500 text-white py-3 rounded -mt-10 items-center">
                                 {{ $errors->first('wrong') }}

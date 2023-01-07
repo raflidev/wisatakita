@@ -60,12 +60,12 @@ Route::prefix('dashboard')->group(function () {
     Route::put('/admin/update/{id}', [UserController::class, 'update'])->name('dashboard.admin_put')->middleware('auth');
     Route::delete('/admin/delete/{id}', [UserController::class, 'destroy'])->name('dashboard.admin_delete')->middleware('auth');
 
-    Route::get('/wisata', [WisataController::class, 'dashboard_wisata'])->name('dashboard.wisata')->middleware('auth');
-    Route::get('/wisata/add', [WisataController::class, 'create'])->name('dashboard.wisata_add')->middleware('auth');
-    Route::post('/wisata/add', [WisataController::class, 'store'])->name('dashboard.wisata_post')->middleware('auth');
-    Route::get('/wisata/update/{id}', [WisataController::class, 'edit'])->name('dashboard.wisata_update')->middleware('auth');
-    Route::put('/wisata/update/{id}', [WisataController::class, 'update'])->name('dashboard.wisata_put')->middleware('auth');
-    Route::delete('/wisata/delete/{id}', [WisataController::class, 'destroy'])->name('dashboard.wisata_delete')->middleware('auth');
+    // Route::get('/wisata', [DashboardController::class, 'wisata'])->name('dashboard.wisata')->middleware('auth');
+    // Route::get('/wisata/add', [WisataController::class, 'create'])->name('dashboard.wisata_add')->middleware('auth');
+    // Route::post('/wisata/add', [WisataController::class, 'store'])->name('dashboard.wisata_post')->middleware('auth');
+    // Route::get('/wisata/update/{id}', [WisataController::class, 'edit'])->name('dashboard.wisata_update')->middleware('auth');
+    // Route::put('/wisata/update/{id}', [WisataController::class, 'update'])->name('dashboard.wisata_put')->middleware('auth');
+    // Route::delete('/wisata/delete/{id}', [WisataController::class, 'destroy'])->name('dashboard.wisata_delete')->middleware('auth');
 
     Route::get('/user', [UserController::class, 'dashboard_user'])->name('dashboard.user')->middleware('auth');
     Route::get('/user/add', [UserController::class, 'create'])->name('dashboard.user_add')->middleware('auth');
