@@ -18,7 +18,7 @@ class WisataController extends Controller
      */
     public function index()
     {
-        $data = Wisata::all();
+        $data = Wisata::limit(4)->get();
         return view('home', ['data' => $data]);
     }
 
@@ -77,13 +77,17 @@ class WisataController extends Controller
             'tipe_wisata' => 'required',
         ]);
 
+        $file = $request->file('gambar');
+        $filename = uniqid() . "_" . $file->getClientOriginalName();
+        $file->storeAs('public/', $filename);
+
         $wisata = new Wisata([
             'nama_wisata' => $request->nama_wisata,
             'id_admin' => $request->id_admin,
             'lokasi' => $request->lokasi,
             'deskripsi' => $request->deskripsi,
             'harga' => $request->harga,
-            'gambar' => $request->gambar,
+            'gambar' => $filename,
             'jam_buka' => $request->jam_buka,
             'jam_tutup' => $request->jam_tutup,
             'max_tiket' => $request->max_tiket,
@@ -127,17 +131,34 @@ class WisataController extends Controller
     public function update(Request $request, $id)
     {
         $wisata = Wisata::find($id);
-        $wisata->update([
-            'nama_wisata' => $request->nama_wisata,
-            'id_admin' => $request->id_admin,
-            'lokasi' => $request->lokasi,
-            'deskripsi' => $request->deskripsi,
-            'harga' => $request->harga,
-            'gambar' => $request->gambar,
-            'jam_buka' => $request->jam_buka,
-            'jam_tutup' => $request->jam_tutup,
-            'max_tiket' => $request->max_tiket,
-        ]);
+        if($request->gambar  != NULL){
+            $file = $request->file('gambar');
+            $filename = uniqid() . "_" . $file->getClientOriginalName();
+            $file->storeAs('public/', $filename);
+
+            $wisata->update([
+                'nama_wisata' => $request->nama_wisata,
+                'id_admin' => $request->id_admin,
+                'lokasi' => $request->lokasi,
+                'deskripsi' => $request->deskripsi,
+                'harga' => $request->harga,
+                'gambar' => $filename,
+                'jam_buka' => $request->jam_buka,
+                'jam_tutup' => $request->jam_tutup,
+                'max_tiket' => $request->max_tiket,
+            ]);
+        }else{
+            $wisata->update([
+                'nama_wisata' => $request->nama_wisata,
+                'id_admin' => $request->id_admin,
+                'lokasi' => $request->lokasi,
+                'deskripsi' => $request->deskripsi,
+                'harga' => $request->harga,
+                'jam_buka' => $request->jam_buka,
+                'jam_tutup' => $request->jam_tutup,
+                'max_tiket' => $request->max_tiket,
+            ]);
+        }
 
         return redirect()->route('dashboard.wisata')->with('success', 'Berhasil Mengubah Wisata');
     }
@@ -151,6 +172,7 @@ class WisataController extends Controller
     public function destroy($id)
     {
         $wisata = Wisata::find($id);
+        unlink("storage/$wisata->gambar");
         $wisata->delete();
         return redirect()->route('dashboard.wisata')->with('success', 'Berhasil Menghapus Wisata');
     }

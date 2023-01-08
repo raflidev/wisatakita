@@ -33,7 +33,7 @@
                 <div>
                     @if (Auth::user() != null)
                         <div class="flex space-x-3">
-                            <a href="{{ route('user.login') }}"
+                            <a href="{{ route('dashboard.index') }}"
                                 class=" font-semibold  text-black py-2 px-4 rounded-lg hover:underline">Halo,
                                 {{ Auth::user()->nama_depan }} {{ Auth::user()->nama_belakang }}</a>
                             <form method="POST" action="{{ route('user.logout') }}">

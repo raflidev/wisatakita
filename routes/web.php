@@ -60,6 +60,8 @@ Route::prefix('dashboard')->group(function () {
     Route::put('/admin/update/{id}', [UserController::class, 'update'])->name('dashboard.admin_put')->middleware('auth');
     Route::delete('/admin/delete/{id}', [UserController::class, 'destroy'])->name('dashboard.admin_delete')->middleware('auth');
 
+    Route::get('/transaksi', [TransaksiController::class, 'index'])->name('dashboard.transaksi')->middleware('auth');
+
     // Route::get('/wisata', [DashboardController::class, 'wisata'])->name('dashboard.wisata')->middleware('auth');
     // Route::get('/wisata/add', [WisataController::class, 'create'])->name('dashboard.wisata_add')->middleware('auth');
     // Route::post('/wisata/add', [WisataController::class, 'store'])->name('dashboard.wisata_post')->middleware('auth');

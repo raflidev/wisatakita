@@ -21,11 +21,18 @@
         </div>
 
         <div class="mt-10">
+            @if(count($data) == 0)
+                <div class="flex justify-center text-white">
+                    <div class="text-center w-1/2 bg-red-500 rounded">
+                        <div class="font-medium py-2 font-raleway text-2xl w-full">Data Tidak Ditemukan</div>
+                    </div>
+                </div>
+            @endif
             <div class="px-40 grid grid-cols-4 gap-10 text-white font-nunito">
                 @foreach ($data as $data)
                     <a href="{{ route('wisata.detail', ['id' => $data->id]) }}"
-                        style='background-image: url("/images/place/{{ $data->gambar }}")'
-                        class="w-[18rem] h-[25rem] bg-gray-800 rounded-xl relative bg-cover">
+                        style='background-image: url("/storage/{{ $data->gambar }}")'
+                        class="w-[18rem] h-[25rem] bg-gray-800 bg-center rounded-xl relative bg-cover">
                         <div class="absolute right-0 py-3 px-5 bg-red-500 rounded-bl-xl rounded-tr-xl">
                             Ramai
                         </div>
