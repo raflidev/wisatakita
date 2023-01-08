@@ -43,7 +43,7 @@ Route::post('/transaksi', [TransaksiController::class, 'store'])->name('transaks
 Route::get('/qr', [QRController::class, 'detail'])->name('qr.home')->middleware('auth');
 
 // Dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index')->middleware('auth');
+Route::redirect('/dashboard', '/dashboard/wisata')->name('dashboard.index')->middleware('auth');
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/wisata', [DashboardController::class, 'wisata'])->name('dashboard.wisata')->middleware('auth');
@@ -61,6 +61,8 @@ Route::prefix('dashboard')->group(function () {
     Route::delete('/admin/delete/{id}', [UserController::class, 'destroy'])->name('dashboard.admin_delete')->middleware('auth');
 
     Route::get('/transaksi', [TransaksiController::class, 'index'])->name('dashboard.transaksi')->middleware('auth');
+
+    Route::get('/history', [TransaksiController::class, 'history'])->name('dashboard.history')->middleware('auth');
 
     // Route::get('/wisata', [DashboardController::class, 'wisata'])->name('dashboard.wisata')->middleware('auth');
     // Route::get('/wisata/add', [WisataController::class, 'create'])->name('dashboard.wisata_add')->middleware('auth');

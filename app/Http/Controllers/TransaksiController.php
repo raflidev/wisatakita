@@ -22,6 +22,15 @@ class TransaksiController extends Controller
         return view('dashboard.transaksi.transaksi_read', ['data' => $data]);
     }
 
+    public function history()
+    {
+        $data = Transaksi::join('wisata', 'wisata.id', '=', 'transaksi.id_wisata')
+            ->select('transaksi.*', 'wisata.nama_wisata', 'transaksi.created_at as tanggal')
+            ->where('transaksi.id_user', Auth::user()->id)
+            ->get();
+        return view('dashboard.transaksi.history', ['data' => $data]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -36,11 +36,6 @@
                     </svg>
                 </div>
             </div>
-            <script>
-                setTimeout(function() {
-                    window.location.href = "/"
-                }, 1000);
-            </script>
         @endif
         <form action="{{route('dashboard.wisata_put', $data['id'])}}" method="post" class="mt-5" enctype="multipart/form-data">
             @csrf

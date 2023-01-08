@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -16,6 +17,11 @@ class UserController extends Controller
     public function index()
     {
         return view('login');
+    }
+
+    public function dashboard_user()
+    {
+        return view('dashboard.user.user_read');
     }
 
 
@@ -132,16 +138,23 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        $user->update([
-            'nama_depan' => $request->nama_depan,
-            'nama_belakang' => $request->nama_belakang,
-            'email' => $request->email, -'kota' => $request->kota,
-            'notelp' => $request->notelp,
-            'username' => $request->username,
-            'password' => bcrypt($request->password),
-        ]);
-
-        return redirect()->route('dashboard.user')->with('success', 'Data Berhasil Diubah');
+        if (Hash::check($request->password, Auth::user()->password)) {
+            $user->update([
+                'nama_depan' => $request->nama_depan,
+                'nama_belakang' => $request->nama_belakang,
+                'email' => $request->email,
+                'kota' => $request->kota,
+                'notelp' => $request->notelp,
+                'username' => $request->username,
+            ]);
+            
+            return redirect()->route('dashboard.user')->with('success', 'Data Berhasil Diubah');
+        }else{
+            
+            return back()->withErrors([
+                'wrong' => 'Password anda salah',
+            ]);
+        }
     }
 
     /**
