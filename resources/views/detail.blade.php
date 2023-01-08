@@ -152,7 +152,7 @@
             <div class="flex justify-between">
                 <div class="w-1/2">
                     <div class="w-[40rem] h-[20rem] rounded bg-cover bg-center float-right"
-                        style="background-image: url('/images/place/{{ $data->gambar }}')">
+                        style="background-image: url('/storage/{{ $data->gambar }}')">
                     </div>
                 </div>
                 <div class="w-1/2 px-10">
@@ -186,7 +186,7 @@
                 <div class="grid grid-cols-2 gap-5">
                     @for ($i = 0; $i < 4; $i++)
                         <div class="w-[40rem] h-[20rem] rounded bg-cover bg-center float-right"
-                            style="background-image: url('/images/place/{{ $data->gambar }}')">
+                            style="background-image: url('/storage/{{ $data->gambar }}')">
                         </div>
                     @endfor
                 </div>

@@ -43,7 +43,7 @@ Route::post('/transaksi', [TransaksiController::class, 'store'])->name('transaks
 Route::get('/qr', [QRController::class, 'detail'])->name('qr.home')->middleware('auth');
 
 // Dashboard
-Route::redirect('/dashboard', '/dashboard/wisata')->name('dashboard.index')->middleware('auth');
+Route::redirect('/dashboard', '/dashboard/history')->name('dashboard.index')->middleware('auth');
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/wisata', [DashboardController::class, 'wisata'])->name('dashboard.wisata')->middleware('auth');

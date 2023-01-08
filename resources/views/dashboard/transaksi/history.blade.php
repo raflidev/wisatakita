@@ -24,7 +24,7 @@
                 </div>
             @endif
         </div>
-        <div class="mt-7 font-bold text-3xl">Transaksi</div>
+        <div class="mt-7 font-bold text-3xl">History Perjalanan</div>
      
         <div class="mt-5 relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-black dark:text-black">
