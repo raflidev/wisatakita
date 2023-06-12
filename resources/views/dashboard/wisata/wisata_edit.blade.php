@@ -4,7 +4,7 @@
 <div class="flex">
     @include('layout.sidebar')
     <div class="px-5 w-10/12">
-        <div class="mt-7 font-bold text-3xl">Tambah Wisata</div>
+        <div class="mt-7 font-bold text-3xl">Edit Wisata</div>
         @if (count($errors) > 0)
         <div id="error" class="px-5 bg-red-500 text-white py-3 rounded items-center">
             @foreach ($errors->all() as $error)
